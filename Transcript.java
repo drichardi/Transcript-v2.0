@@ -23,15 +23,16 @@ public class Transcript
     System.out.println(this.student.phoneNumber);
     System.out.println(this.student.dob);
     System.out.println(this.student.guardian);
-    System.out.println("\n\n");
+    System.out.println("\n");
     System.out.println(this.school.name);
     System.out.println(this.school.address);
     System.out.println(this.school.phoneNumber);
     System.out.println(this.school.email);
-    System.out.println("\n\n");
+    System.out.println("\n");
 
     for(HashMap<Course, Character> years : grades)
     {
+      System.out.println("--------Class--------Credits----Grade--");
       for(Course course : years.keySet())
       {
         System.out.println(course.name + "\t\t" +
