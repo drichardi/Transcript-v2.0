@@ -29,7 +29,7 @@ public class Transcript
     System.out.println(this.school.phoneNumber);
     System.out.println(this.school.email);
     System.out.println("\n\n");
-    
+
     for(HashMap<Course, Character> years : grades)
     {
       for(Course course : years.keySet())
@@ -87,7 +87,7 @@ public class Transcript
     dmr84.sophomoreYear = dmr84.assignGrades(sophomoreCourses);
     dmr84.juniorYear = dmr84.assignGrades(juniorCourses);
     dmr84.seniorYear = dmr84.assignGrades(seniorCourses);
-
+    dmr84.compileGrades();
 
     Transcript dmrTrans = new Transcript(dmr84, kennett, dmr84.grades);
     dmrTrans.printTranscript();
