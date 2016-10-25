@@ -5,7 +5,7 @@ public class Transcript
   Student student;
   School school;
 
-    ArrayList<HashMap<Course, Character>> grades = new ArrayList<HashMap<Course, Character>>();
+  ArrayList<HashMap<Course, Character>> grades = new ArrayList<HashMap<Course, Character>>();
 
   public Transcript( Student student, School school, ArrayList<HashMap<Course, Character>> grades)
   {
@@ -29,16 +29,17 @@ public class Transcript
     System.out.println(this.school.phoneNumber);
     System.out.println(this.school.email);
     System.out.println("\n\n");
-
-    //NEED TO UPDATE FOR NEW grades ARRAYLIST
-    for(Course course : freshGrades.keySet())
+    
+    for(HashMap<Course, Character> years : grades)
     {
-      System.out.println(course.name + "\t\t" +
-                         course.credits + "\t" +
-                         freshGrades.get(course));
-    }
+      for(Course course : years.keySet())
+      {
+        System.out.println(course.name + "\t\t" +
+                           course.credits + "\t" +
+                           years.get(course));
+      }
   }
-
+}
   public static void main(String[] args)
   {
     School kennett = new School("Kennett High School", "409 Eagles' Way, North Conway, NH", "603-356-4343", "info@khs.com");
@@ -87,7 +88,8 @@ public class Transcript
     dmr84.juniorYear = dmr84.assignGrades(juniorCourses);
     dmr84.seniorYear = dmr84.assignGrades(seniorCourses);
 
-    Transcript dmrTrans = new Transcript(dmr84, kennett, dmr84.freshmanYear);
+
+    Transcript dmrTrans = new Transcript(dmr84, kennett, dmr84.grades);
     dmrTrans.printTranscript();
   }
 }
@@ -123,6 +125,7 @@ class Student
   HashMap<Course, Character> sophomoreYear;
   HashMap<Course, Character> juniorYear;
   HashMap<Course, Character> seniorYear;
+  ArrayList<HashMap<Course, Character>> grades;
 
   public Student(String name,
                 String address,
@@ -140,7 +143,7 @@ class Student
         sophomoreYear = new HashMap<Course, Character>();
         juniorYear = new HashMap<Course, Character>();
         seniorYear = new HashMap<Course, Character>();
-
+        grades = new ArrayList<HashMap<Course, Character>>();
   }
   public HashMap<Course, Character> assignGrades(ArrayList<Course> courses)
   {
@@ -162,6 +165,10 @@ class Student
   {
     //TODO
     return 0;
+  }
+  public void compileGrades()
+  {
+    grades.addAll(Arrays.asList(freshmanYear, sophomoreYear, juniorYear, seniorYear));
   }
 }
 
