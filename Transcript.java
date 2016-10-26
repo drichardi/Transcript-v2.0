@@ -5,40 +5,55 @@ public class Transcript
   Student student;
   School school;
 
-  ArrayList<HashMap<Course, Character>> grades = new ArrayList<HashMap<Course, Character>>();
-
-  public Transcript( Student student, School school, ArrayList<HashMap<Course, Character>> grades)
+  public Transcript( Student student, School school)
   {
     this.student = student;
     this.school = school;
-    this.grades = grades;
   }
 
   public void printTranscript()
   {
    //TODO
     System.out.println("\nInitializing Transcript....\n\n\n");
-    System.out.println(this.student.name);
-    System.out.println(this.student.address);
-    System.out.println(this.student.phoneNumber);
-    System.out.println(this.student.dob);
-    System.out.println(this.student.guardian);
+    System.out.println(student.address);
+    System.out.println(student.name);
+    System.out.println(student.phoneNumber);
+    System.out.println(student.dob);
+    System.out.println(student.guardian);
     System.out.println("\n");
-    System.out.println(this.school.name);
-    System.out.println(this.school.address);
-    System.out.println(this.school.phoneNumber);
-    System.out.println(this.school.email);
+    System.out.println(school.name);
+    System.out.println(school.address);
+    System.out.println(school.phoneNumber);
+    System.out.println(school.email);
     System.out.println("\n");
 
-    for(HashMap<Course, Character> years : grades)
+    int year = 9;
+    for(HashMap<Course, Character> years : student.grades)
     {
-      System.out.println("--------Class--------Credits----Grade--");
+      System.out.println("--------------------Grade-" + year + "-----------------" );
+      System.out.println("--------Class----------------Credits--Grade--");
       for(Course course : years.keySet())
       {
-        System.out.println(course.name + "\t\t" +
-                           course.credits + "\t" +
-                           years.get(course));
+        if(course.name.length() < 8)
+        {
+          System.out.println("\t"+course.name + "\t\t\t" +
+                             course.credits + "\t" +
+                             years.get(course));
+        }
+        else if(course.name.length() > 15)
+        {
+          System.out.println("\t"+course.name + "\t" +
+                             course.credits + "\t" +
+                             years.get(course));
+        }
+
+        else {
+          System.out.println("\t"+course.name + "\t\t" +
+                             course.credits + "\t" +
+                             years.get(course));
+        }
       }
+      year++;
   }
 }
   public static void main(String[] args)
@@ -90,7 +105,7 @@ public class Transcript
     dmr84.seniorYear = dmr84.assignGrades(seniorCourses);
     dmr84.compileGrades();
 
-    Transcript dmrTrans = new Transcript(dmr84, kennett, dmr84.grades);
+    Transcript dmrTrans = new Transcript(dmr84, kennett);
     dmrTrans.printTranscript();
   }
 }
