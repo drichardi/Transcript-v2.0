@@ -1,34 +1,34 @@
-import java.util.*;
+import java.util.*;                                                             //Import all of java.util
 
-public class Transcript
+public class Transcript                                                         //Declare the class for the Transcript file.
 {
-  Student student;
-  School school;
+  Student student;                                                              //Defines a Student called student.
+  School school;                                                                //Defines a School called school.
 
-  public Transcript( Student student, School school)
+  public Transcript( Student student, School school)                            //Transcript class constructor definition.
   {
-    this.student = student;
-    this.school = school;
+    this.student = student;                                                     //Saves parameters to the current student.
+    this.school = school;                                                       //Does what the previous line does but with school.
   }
 
-  public void printTranscript()
+  public void printTranscript()                                                 //Declaring a function called printTranscript
   {
 
-    System.out.println("\nInitializing Transcript....\n\n\n");
-    System.out.println(student.address);
-    System.out.println(student.name);
-    System.out.println(student.phoneNumber);
-    System.out.println(student.dob);
-    System.out.println(student.guardian);
-    System.out.println("\n");
-    System.out.println(school.name);
-    System.out.println(school.address);
-    System.out.println(school.phoneNumber);
-    System.out.println(school.email);
+    System.out.println("\nInitializing Transcript....\n\n\n");                  //Just some text.
+    System.out.println(student.address);                                        //Prints the student's address.
+    System.out.println(student.name);                                           //^ Name
+    System.out.println(student.phoneNumber);                                    //^ Phone Number
+    System.out.println(student.dob);                                            //^ Date of Birth
+    System.out.println(student.guardian);                                       //^ Guardian(s)
+    System.out.println("\n");                                                   // Breaks line
+    System.out.println(school.name);                                            //Prints the school's name.
+    System.out.println(school.address);                                         //^ Address.
+    System.out.println(school.phoneNumber);                                     //^ Phone Number
+    System.out.println(school.email);                                           //^ Email Address
     System.out.println("\n");
 
-    int year = 9;
-    for(HashMap<Course, Character> years : student.grades)
+    int year = 9;                                                               //Year = 9 for Freshman Year
+    for(HashMap<Course, Character> years : student.grades)                      //Prints the courses
     {
       System.out.println("--------------------Grade-" + year + "-----------------" );
       System.out.println("--------Class----------------Credits--Grade--");
@@ -57,7 +57,7 @@ public class Transcript
   }
   System.out.println("Calculated GPA over 4 years: "+ String.format("%.01f", student.calculateGPA()));
 }
-  public static void main(String[] args)
+  public static void main(String[] args)  //Puts info in the hashmap to use later.
   {
     School kennett = new School("Kennett High School", "409 Eagles' Way, North Conway, NH", "603-356-4343", "info@khs.com");
     Student dmr84 = new Student("Dan Richardi", "123 You Wish, North Conway, NH", "555-555-5555", "01/29/1984", "Gandalf");
@@ -111,7 +111,7 @@ public class Transcript
 
   }
 }
-class School
+class School                                                                    //Shcool class declaration
 {
   String name;
   String address;
@@ -121,7 +121,7 @@ class School
   public School( String name,
                   String address,
                   String phoneNumber,
-                  String email)
+                  String email)                                                 //School class constructor
   {
     this.name = name;
     this.address = address;
@@ -131,7 +131,7 @@ class School
 
 }
 
-class Student
+class Student                                                                   //Student class declaration
 {
   String name;
   String address;
@@ -149,7 +149,7 @@ class Student
                 String address,
                 String phoneNumber,
                 String dob,
-                String guardian)
+                String guardian)                                                //Student class constructor.
   {
         this.name = name;
         this.address = address;
@@ -189,9 +189,9 @@ class Student
     {
       for (Course course : gradeYear.keySet())
       {
-        switch(gradeYear.get(course))
-        {
-          case 'A':
+        switch(gradeYear.get(course))                                           //To summarize this whole block, it takes the GPA
+        {                                                                       //of the course and gives it a letter grade based on what
+          case 'A':                                                             //it was. It keeps track of how many courses completed, too.
             total += 4.0f;
             courseCount++;
             break;
@@ -206,6 +206,7 @@ class Student
           case 'D':
             total += 1.0f;
             courseCount++;
+            break;                                                              //You forgot a break here, I added it for you.
           default:
             courseCount++;
             break;
@@ -214,23 +215,23 @@ class Student
       }
     }
 
-    return total/courseCount;
+    return total/courseCount;                                                   //Returns the average.
   }
-  public void compileGrades()
+  public void compileGrades()                                                   //Declare a function called compileGrades
   {
-    grades.addAll(Arrays.asList(freshmanYear, sophomoreYear, juniorYear, seniorYear));
+    grades.addAll(Arrays.asList(freshmanYear, sophomoreYear, juniorYear, seniorYear));//Adds all the grades
   }
 }
 
-class Course
+class Course                                                                    //Declares a course class
 {
-  String name;
+  String name;                                                                  //Declares variables in the class
   float credits;
 
   public Course(String name,
-                float credits)
+                float credits)                                                  //Class constructor
   {
-    this.name = name;
+    this.name = name;                                                           //Gives the vars values via the parameters
     this.credits = credits;
   }
 }
