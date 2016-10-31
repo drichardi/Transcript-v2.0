@@ -13,7 +13,7 @@ public class Transcript
 
   public void printTranscript()
   {
-   //TODO
+
     System.out.println("\nInitializing Transcript....\n\n\n");
     System.out.println(student.address);
     System.out.println(student.name);
@@ -55,6 +55,7 @@ public class Transcript
       }
       year++;
   }
+  System.out.println("Calculated GPA over 4 years: "+ String.format("%.01f", dmrTrans.student.calculateGPA()));
 }
   public static void main(String[] args)
   {
@@ -98,7 +99,7 @@ public class Transcript
     seniorCourses.add(new Course("Studio Art", 1.0f));
     seniorCourses.add(new Course("Piano", 0.5f));
 
-    //Refactor in future to loop
+
     dmr84.freshmanYear = dmr84.assignGrades(freshmanCourses);
     dmr84.sophomoreYear = dmr84.assignGrades(sophomoreCourses);
     dmr84.juniorYear = dmr84.assignGrades(juniorCourses);
@@ -107,6 +108,7 @@ public class Transcript
 
     Transcript dmrTrans = new Transcript(dmr84, kennett);
     dmrTrans.printTranscript();
+
   }
 }
 class School
@@ -179,8 +181,40 @@ class Student
 
   public float calculateGPA()
   {
-    //TODO
-    return 0;
+    float total = 0.0f;
+    int courseCount = 0;
+
+    //Simple GPA Calculation - A = 4, B = 3, C = 2, D = 1, F = 0
+    for (HashMap<Course, Character> gradeYear : grades)
+    {
+      for (Course course : gradeYear.keySet())
+      {
+        switch(gradeYear.get(course))
+        {
+          case 'A':
+            total += 4.0f;
+            courseCount++;
+            break;
+          case 'B':
+            total += 3.0f;
+            courseCount++;
+            break;
+          case 'C':
+            total += 2.0f;
+            courseCount++;
+            break;
+          case 'D':
+            total += 1.0f;
+            courseCount++;
+          default:
+            courseCount++;
+            break;
+
+        }
+      }
+    }
+
+    return total/courseCount;
   }
   public void compileGrades()
   {
