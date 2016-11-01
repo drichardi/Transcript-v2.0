@@ -1,4 +1,5 @@
 import java.util.*;                                                             //Import all of java.util
+import java.io.*;
 
 public class Transcript                                                         //Declare the class for the Transcript file.
 {
@@ -9,6 +10,35 @@ public class Transcript                                                         
   {
     this.student = student;                                                     //Saves parameters to the current student.
     this.school = school;                                                       //Does what the previous line does but with school.
+  }
+
+  public void exportTranscript() throws FileNotFoundException {
+
+    int year = 9;
+
+    PrintWriter writer = new PrintWriter(new File("Transcript.csv"));
+
+    String sb = "Student Info\n";
+    sb += "Name, Address, Phone Number, Date of Birth, Guardian(s)\n";
+    sb += student.name + "," + student.address + "," + student.phoneNumber + ","
+    + student.guardian + "\n";
+    sb += "School Info\n";
+    sb += school.name + "," + school.address + "," + school.phoneNumber + ","
+    + school.email + "\n";
+
+    for(HashMap<Course, Character> years : student.grades) {
+      sb += "Grade " + year + "\n";
+      for(Course course : years.keySet()) {
+          sb += course.name + "," + course.credits + "," + years.get(course) + "\n";
+      }
+      year++;
+    }
+
+    sb += "Calculated GPA over 4 years: "+ "," + String.format("%.01f", student.calculateGPA());
+
+    writer.write(sb);
+    writer.close();
+
   }
 
   public void printTranscript()                                                 //Declaring a function called printTranscript
@@ -108,6 +138,13 @@ public class Transcript                                                         
 
     Transcript dmrTrans = new Transcript(dmr84, kennett);
     dmrTrans.printTranscript();
+
+    try {
+      dmrTrans.exportTranscript();
+    }
+    catch (Exception e) {
+
+    }
 
   }
 }
@@ -234,4 +271,5 @@ class Course                                                                    
     this.name = name;                                                           //Gives the vars values via the parameters
     this.credits = credits;
   }
+
 }
