@@ -55,7 +55,7 @@ public class Transcript
       }
       year++;
   }
-  System.out.println("Calculated GPA over 4 years: "+ String.format("%.01f", dmrTrans.student.calculateGPA()));
+  System.out.println("Calculated GPA over 4 years: "+ String.format("%.01f", student.calculateGPA()));
 }
   public static void main(String[] args)
   {
